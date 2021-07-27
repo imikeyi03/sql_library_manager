@@ -8,7 +8,8 @@ let sequelize = require('./models').sequelize; //import Sequelize
 
 // Initalize main and book routes
 const routes = require('./routes/index');
-const books = require('./routes/books')
+const books = require('./routes/books');
+const { isBuffer } = require('util');
 
 const app = express();
 
@@ -39,18 +40,24 @@ app.use('/books', books);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+  console.log("404 error handler called")
+  const err = new Error;
+    err.status = 404;
+    err.message = "Oops! The page you requested seems to not exist!"
+  res.status(404).render('notFound', {err});
 });
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+  console.log("Global handler called");
+  if(err.status === 404) {
+    console.log('404 handler called');
+    res.status(404).render('notFound', {err});
+  } else {
+    const status = err.status || 500;
+    res.status(status);
+    res.render('error', {err});
+  }
 });
 
 
