@@ -38,27 +38,25 @@ app.use('/books', books);
 //   }
 // }) ();
 
-// catch 404 and forward to error handler
+//Catches 404 errors
 app.use(function(req, res, next) {
-  console.log("404 error handler called")
   const err = new Error;
     err.status = 404;
-    err.message = "Oops! The page you requested seems to not exist!"
-  res.status(404).render('notFound', {err});
+    err.message = "Oops! Page does not exist!"
+  res.status(404).render('page-not-found', {err});
 });
 
-// error handler
+//Global error handler
 app.use(function(err, req, res, next) {
-  console.log("Global handler called");
-  if(err.status === 404) {
-    console.log('404 handler called');
-    res.status(404).render('notFound', {err});
+  if(err.status === 404){
+    res.status(404).render('page-not-found', {err});
   } else {
     const status = err.status || 500;
     res.status(status);
     res.render('error', {err});
   }
 });
+
 
 
 
