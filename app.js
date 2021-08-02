@@ -9,7 +9,6 @@ let sequelize = require('./models').sequelize; //import Sequelize
 // Initalize main and book routes
 const routes = require('./routes/index');
 const books = require('./routes/books');
-const { isBuffer } = require('util');
 
 const app = express();
 
