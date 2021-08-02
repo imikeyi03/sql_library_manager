@@ -55,7 +55,7 @@ router.post('/new', asyncHandler(async (req, res, next) => {
 
   try {
     newBook = await Book.create(req.body);
-    await res.redirect('/books');
+    res.redirect('/books');
 
   } catch (error) {
       if(error.name === 'SequelizeValidationError') {
@@ -92,6 +92,22 @@ router.post('/:id', asyncHandler(async (req, res) => {
       }
   }
 }));
+
+
+
+// POST REQUEST: Delete book in the database
+router.post('/:id/delete', asyncHandler(async (req, res) => {
+    
+  const deleteBook = await Book.findByPk(req.params.id);
+    if(deleteBook) {
+      await deleteBook.destroy();
+      res.redirect('/books');
+    } else {
+        const error = new Error(`Looks like the book ID ${req.params.id} doesn't exist in our records`)
+        error.status = 404;
+        throw error;
+    }
+  }));
 
 
 
