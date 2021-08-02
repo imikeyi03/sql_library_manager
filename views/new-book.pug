@@ -4,6 +4,7 @@ extends layout
 block content
   h1 New Book
 
+  //- Brings in error on form entry
   include form-errors
   
   form(action='/books/new', method='POST')

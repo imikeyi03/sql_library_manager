@@ -3,6 +3,7 @@ extends layout
 block content
   h1 Update Book
 
+  //- Brings in error on form entry
   include form-errors
 
   form(method='POST' action=`/books/${book.id}` onsubmit='/books')
