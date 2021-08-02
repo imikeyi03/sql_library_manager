@@ -26,16 +26,6 @@ app.use('/', routes);
 app.use('/books', books);
 
 
-// IIFE to test connection to DB
-// (async () => {
-//   try {
-//     await sequelize.authenticate();
-//     console.log('Connection has been established successfully.');
-//   } catch (error) {
-//     console.error('Unable to connect to the database:', error);
-//   }
-// }) ();
-
 //Catches 404 errors
 app.use(function(req, res, next) {
   const err = new Error;
