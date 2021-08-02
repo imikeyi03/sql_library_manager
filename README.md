@@ -1,5 +1,5 @@
 # sql_library_manager
-A sequelize database management app run on express, PUG, and sqlite
+A sequelize database management app run on ExpressJS, PUG, and sqlite
 
 ## Purpose
 This exercise helped me solidify my understanding of using an Object-Relational Mapping techniques to iterate a Sqlite database using models with validation. This allows us to use JavaScript syntax to run INSERT, UPDATE, and DELETE statments.
