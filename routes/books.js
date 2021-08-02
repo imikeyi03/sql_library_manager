@@ -17,7 +17,7 @@ function asyncHandler(cb){
 
 
 // GET REQUEST: Retrieve all books and display them using the books view
-router.get('/', asyncHandler(async (req, res, next) => {
+router.get('/', asyncHandler(async (req, res) => {
   const books = await Book.findAll();
   res.render('books', {books})
 }));
@@ -25,7 +25,7 @@ router.get('/', asyncHandler(async (req, res, next) => {
 
 
 // GET REQUEST: Display the create new book view
-router.get('/new', asyncHandler(async (req, res, next) => {
+router.get('/new', asyncHandler(async (req, res) => {
   res.render('new-book', { book: {}, title: "New Book" });
 }));
 
@@ -55,13 +55,13 @@ router.post('/new', asyncHandler(async (req, res, next) => {
 
   try {
     newBook = await Book.create(req.body);
-    await res.redirect('/books');
+    res.redirect('/books');
 
   } catch (error) {
       if(error.name === 'SequelizeValidationError') {
         console.log(req.body)
         newBook = await Book.build(req.body);
-        res.render('new-book', {newBook, errors: error.errors})
+        res.render('new-book', { newBook, errors: error.errors})
       } else {
         throw error;
       }

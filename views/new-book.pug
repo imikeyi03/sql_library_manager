@@ -1,7 +1,10 @@
 extends layout
 
+
 block content
   h1 New Book
+
+  include form-errors
   
   form(action='/books/new', method='POST')
     p

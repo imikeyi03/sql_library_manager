@@ -3,14 +3,15 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-let sequelize = require('./models').sequelize; //import Sequelize
+const app = express();
 
 
 // Initalize main and book routes
 const routes = require('./routes/index');
 const books = require('./routes/books');
 
-const app = express();
+
+const {sequelize} = require('./models/index'); //import Sequelize
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
